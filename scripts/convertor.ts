@@ -13,7 +13,7 @@ type ValueOf<T> = T[keyof T];
  * })()
  * ```
  */
-export async function CSV2JSON<T>(filename: string): Promise<T[]> {
+export async function CSV2JSON<T = Record<string, string>>(filename: string): Promise<T[]> {
   const text = format(await Deno.readTextFile(filename), EOL.LF);
   const rows = text.split(EOL.LF);
 
