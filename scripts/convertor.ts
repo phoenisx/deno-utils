@@ -6,12 +6,13 @@ type ValueOf<T> = T[keyof T];
 /**
  * Converts a simple CSV file to it's JSON representation.
  *
- * ### Usage:
  * ```ts
  * (async () => {
  *  const json = await CSV2JSON<{id: string}>('filename');
  * })()
  * ```
+ *
+ * @param {string} filename [Required] Resolved path to proper CSV File
  */
 export async function CSV2JSON<T = Record<string, string>>(filename: string): Promise<T[]> {
   const text = format(await Deno.readTextFile(filename), EOL.LF);
