@@ -1,0 +1,11 @@
+{
+  "name": "deno-utils",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:phoenisx/deno-utils.git",
+  "author": "Subroto <shub1493biswas@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mdast-util-from-markdown": "^0.8.5"
+  }
+}
