@@ -72,3 +72,54 @@ export async function CSV2JSON<T = Record<string, string>>(filename: string): Pr
     return json;
   }, []);
 }
+
+/**
+ *
+ * CSV outputs work differently for different applications it seems
+ * Ref for Xcel sheets: https://stackoverflow.com/questions/10546933/inserting-multiline-text-in-a-csv-field
+ *
+ * But Since I am developing for Google Sheets, the CSV new lines inside a column is double
+ * quoted and any double quotes inside that column value is escaped using double quotes again,
+ * making a string like: `"abc"\n'foo'\n"bar"` represented in CSV as:
+ * `"""abc""\n'foo'\n""bar"""`
+ */
+const escapeDoubleQuotes = (value: string) => {
+  return value.replaceAll('"', '""');
+}
+
+/**
+ * Converts a JSON file to it's CSV representation.
+ * NOTE: JSON should be an array of objects, where key represents the column name and
+ * values form a row in that table.
+ *
+ * @param filename Resolved path to proper JSON File
+ * @returns {string} String in CSV format, comma separated
+ */
+export async function JSON2CSV<T = string | number | boolean>(filename: string): Promise<string> {
+  const json = JSON.parse(await Deno.readTextFile(filename)) as {[key: string]: T}[];
+
+  const columnNames = json.reduce((acc, item) => {
+    const keys = Object.keys(item);
+    keys.forEach(k => acc.add(k));
+    return acc;
+  }, new Set<string>());
+
+  const headString = [...columnNames].join(',');
+  const rows: string[] = [];
+
+  for (const row of json) {
+    let rowString = '';
+    for (const columnName of columnNames) {
+      if (row[columnName]) {
+        const shouldEscapeValue = typeof row[columnName] === "string" ? (row[columnName] as string).includes(EOL.LF) || (row[columnName] as string).includes(",") : false;
+        rowString += shouldEscapeValue ? `"${escapeDoubleQuotes(row[columnName] as string)}",` : `${row[columnName]},`;
+      } else {
+        rowString += ',';
+      }
+    }
+    rowString = rowString.substring(0, rowString.length - 1); // Remove the comma from the end.
+    rows.push(rowString);
+  }
+
+  return `${headString}\n${rows.join("\n")}\n`;
+}

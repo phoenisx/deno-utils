@@ -1,0 +1,5 @@
+{
+   "tasks": {
+      "json2csv": "deno run "
+   }
+}

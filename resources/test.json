@@ -1,0 +1,38 @@
+[
+   {
+      "KEY": "__KEY_001__",
+      "COL 1": "foo.com",
+      "COL 2": "google.com",
+      "USAGES": "path/to/som/script-001.js"
+   },
+   {
+      "KEY": "__KEY_002__",
+      "COL 1": "foo.com/002",
+      "COL 2": "example.com",
+      "USAGES": "\"path/to/some\"'/script-002.js',\npath/to/some/script-002_01.js"
+   },
+   {
+      "KEY": "__KEY_003__",
+      "COL 1": "foo.com/003\nfoo.com/003_01",
+      "COL 2": "twitter.com",
+      "COL 3": "path/to/some/script-003.js\npath/to/some/script-003_01.js"
+   },
+   {
+      "KEY": "__KEY_004__",
+      "COL 1": "foo.com/004",
+      "COL 2": "x.com",
+      "USAGES": "path/to/some/script-004.js\npath/to/some/script-004_01.js"
+   },
+   {
+      "KEY": "__KEY_005__",
+      "COL 1": "foo.com/005",
+      "COL 2": "instagram.com",
+      "COL 4": "path/to/some/script-005.js\npath/to/some/script-005_01.js"
+   },
+   {
+      "KEY": "__KEY_006__",
+      "COL 1": "foo.com/006",
+      "COL 2": "elandom.com",
+      "USAGES": "path/to/some/script-006.js\npath/to/some/script-006_01.js"
+   }
+]

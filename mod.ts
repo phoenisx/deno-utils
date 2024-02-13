@@ -1,1 +1,1 @@
-export { CSV2JSON } from "./scripts/convertor.ts";
+export { CSV2JSON, JSON2CSV } from "./scripts/convertor.ts";
